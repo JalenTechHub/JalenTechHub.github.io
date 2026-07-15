@@ -1,0 +1,1177 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Jalen Joseph's Portfolio</title>
+		<link rel="icon" type="image/png" href="images/Jay.webp">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+
+		<style>
+			:root {
+				--blue: #3a8fd8;
+				--blue-dark: #2570b5;
+				--blue-glow: rgba(58,143,216,0.25);
+				--bg-dark: #0e1117;
+				--bg-card: #161b26;
+				--bg-card2: #1c2333;
+				--text: #e8ecf4;
+				--text-muted: #8892a4;
+				--accent: #4facfe;
+				--red: #e05b5b;
+				--green: #43d98e;
+				--border: rgba(255,255,255,0.07);
+			}
+
+			*, *::before, *::after { box-sizing: border-box; }
+
+			body {
+				font-family: 'DM Sans', sans-serif;
+				background: var(--bg-dark);
+				color: var(--text);
+				margin: 0;
+				overflow-x: hidden;
+			}
+
+			/* ── NAV ── */
+			.nav-bar {
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				background: transparent;
+				padding: 28px 40px;
+				z-index: 1000;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				transition: all 0.4s ease;
+			}
+			.nav-bar.scrolled {
+				background: rgba(14,17,23,0.95);
+				backdrop-filter: blur(12px);
+				padding: 16px 40px;
+				border-bottom: 1px solid var(--border);
+			}
+			.name-title {
+				font-family: 'Space Mono', monospace;
+				color: white;
+				font-size: 1em;
+				letter-spacing: 3px;
+				cursor: pointer;
+				transition: color 0.3s;
+			}
+			.name-title:hover { color: var(--accent); }
+			.nav-links { display: flex; gap: 28px; align-items: center; }
+			.nav-links a {
+				color: rgba(255,255,255,0.75);
+				text-decoration: none;
+				font-family: 'Space Mono', monospace;
+				font-size: 0.72em;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				transition: color 0.3s;
+			}
+			.nav-links a:hover { color: white; }
+			.nav-links a.resume-nav {
+				color: var(--red);
+				border: 1px solid rgba(224,91,91,0.4);
+				padding: 6px 14px;
+				border-radius: 4px;
+				transition: all 0.3s;
+			}
+			.nav-links a.resume-nav:hover {
+				background: rgba(224,91,91,0.12);
+				color: var(--red);
+			}
+
+			/* ── LANDING ── */
+			.landing-page {
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				padding: 0 20px;
+				position: relative;
+				color: white;
+				overflow: hidden;
+			}
+			.landing-page::before {
+				content: "";
+				background: url('images/background.jpeg') no-repeat center center;
+				background-size: cover;
+				position: absolute;
+				inset: 0;
+				z-index: 0;
+				filter: brightness(0.35);
+			}
+			.landing-page::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(ellipse at center, rgba(58,143,216,0.12) 0%, transparent 70%);
+				z-index: 0;
+			}
+			.landing-content { position: relative; z-index: 1; }
+			.profile-overlay {
+				width: 170px;
+				height: 170px;
+				border-radius: 50%;
+				object-fit: cover;
+				border: 3px solid rgba(79,172,254,0.6);
+				box-shadow: 0 0 40px rgba(79,172,254,0.2), 0 8px 32px rgba(0,0,0,0.6);
+				margin-bottom: 28px;
+				position: relative;
+				z-index: 1;
+				animation: fadeInDown 0.8s ease both;
+			}
+			@keyframes fadeInDown {
+				from { opacity: 0; transform: translateY(-20px); }
+				to   { opacity: 1; transform: translateY(0); }
+			}
+			@keyframes fadeInUp {
+				from { opacity: 0; transform: translateY(20px); }
+				to   { opacity: 1; transform: translateY(0); }
+			}
+			.landing-content h1 {
+				font-family: 'Space Mono', monospace;
+				font-size: 2.8em;
+				font-weight: 700;
+				letter-spacing: 4px;
+				margin: 0 0 10px;
+				color: #fff;
+				animation: fadeInUp 0.8s 0.2s ease both;
+			}
+			.landing-sub {
+				font-size: 0.85em;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.6);
+				margin: 0 0 8px;
+				animation: fadeInUp 0.8s 0.35s ease both;
+			}
+			.landing-handle {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.78em;
+				color: var(--accent);
+				letter-spacing: 2px;
+				margin: 0 0 32px;
+				animation: fadeInUp 0.8s 0.5s ease both;
+			}
+			.landing-handle a { color: inherit; text-decoration: none; }
+			.cert-badges {
+				display: flex;
+				gap: 10px;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-bottom: 36px;
+				animation: fadeInUp 0.8s 0.65s ease both;
+			}
+			.cert-badge {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.65em;
+				letter-spacing: 1.5px;
+				padding: 5px 12px;
+				border-radius: 3px;
+				border: 1px solid rgba(255,255,255,0.2);
+				color: rgba(255,255,255,0.8);
+				background: rgba(255,255,255,0.05);
+				backdrop-filter: blur(4px);
+			}
+			.cert-badge.sec { border-color: rgba(224,91,91,0.5); color: #f08080; background: rgba(224,91,91,0.08); }
+			.cert-badge.net { border-color: rgba(79,172,254,0.5); color: #7ec8fe; background: rgba(79,172,254,0.08); }
+			.cert-badge.itf { border-color: rgba(67,217,142,0.5); color: #6de8a8; background: rgba(67,217,142,0.08); }
+			.enter-btn {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.8em;
+				letter-spacing: 2px;
+				padding: 14px 44px;
+				background: var(--accent);
+				color: #0e1117;
+				border-radius: 4px;
+				text-decoration: none;
+				font-weight: 700;
+				transition: all 0.3s;
+				animation: fadeInUp 0.8s 0.8s ease both;
+				display: inline-block;
+			}
+			.enter-btn:hover {
+				background: #fff;
+				transform: translateY(-3px);
+				box-shadow: 0 12px 30px rgba(79,172,254,0.35);
+			}
+			.scroll-indicator {
+				position: absolute;
+				bottom: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 6px;
+				animation: fadeInUp 1s 1.2s ease both;
+			}
+			.scroll-line {
+				width: 1px;
+				height: 40px;
+				background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+				animation: scrollPulse 2s ease-in-out infinite;
+			}
+			@keyframes scrollPulse {
+				0%,100% { opacity: 0.3; } 50% { opacity: 1; }
+			}
+
+			/* ── ABOUT ── */
+			#about {
+				background: linear-gradient(160deg, #0e1117 0%, #111827 100%);
+				padding: 6em 0 5em;
+			}
+			.inner { max-width: 1000px; margin: 0 auto; padding: 0 2em; }
+			.profile-header {
+				display: grid;
+				grid-template-columns: 260px 1fr;
+				gap: 60px;
+				align-items: start;
+			}
+			.profile-pic {
+				width: 100%;
+				border-radius: 8px;
+				object-fit: cover;
+				box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+				border: 1px solid var(--border);
+			}
+			.bio-content h2 {
+				font-family: 'Space Mono', monospace;
+				color: white;
+				font-size: 2em;
+				letter-spacing: 2px;
+				margin: 0 0 6px;
+			}
+			.bio-role {
+				font-size: 0.78em;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin: 0 0 22px;
+				font-family: 'Space Mono', monospace;
+			}
+			.bio-content p {
+				color: rgba(255,255,255,0.72);
+				font-size: 0.97em;
+				line-height: 1.8;
+				margin-bottom: 14px;
+			}
+			.bio-divider {
+				height: 1px;
+				background: var(--border);
+				margin: 24px 0;
+			}
+			.category-links {
+				display: flex; gap: 10px; flex-wrap: wrap;
+			}
+			.category-link {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.7em;
+				letter-spacing: 2px;
+				padding: 9px 18px;
+				border: 1px solid rgba(255,255,255,0.2);
+				border-radius: 4px;
+				color: rgba(255,255,255,0.8);
+				text-decoration: none;
+				transition: all 0.3s;
+			}
+			.category-link:hover {
+				border-color: var(--accent);
+				color: var(--accent);
+				background: rgba(79,172,254,0.05);
+			}
+			.resume-link {
+				border-color: rgba(224,91,91,0.4);
+				color: var(--red);
+			}
+			.resume-link:hover {
+				border-color: var(--red);
+				background: rgba(224,91,91,0.06);
+				color: var(--red);
+			}
+
+			/* ── EXPERIENCE ── */
+			#experience {
+				background: linear-gradient(160deg, #0a0f1a 0%, #0e1117 100%);
+				padding: 5em 0;
+				border-top: 1px solid var(--border);
+			}
+			.experience-list {
+				max-width: 780px;
+				margin: 0 auto;
+				padding: 0 2em;
+			}
+			.experience-card {
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				border-radius: 10px;
+				padding: 1.8em 2em;
+				transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+			}
+			.experience-card:hover {
+				transform: translateY(-5px);
+				border-color: rgba(79,172,254,0.3);
+				box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+			}
+			.experience-top {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				gap: 1em;
+				flex-wrap: wrap;
+				margin-bottom: 0.6em;
+			}
+			.experience-role-group {
+				display: flex;
+				align-items: flex-start;
+				gap: 14px;
+			}
+			.experience-icon {
+				width: 40px;
+				height: 40px;
+				flex-shrink: 0;
+				border-radius: 8px;
+				background: rgba(79,172,254,0.12);
+				border: 1px solid rgba(79,172,254,0.3);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--accent);
+				font-size: 1.1em;
+			}
+			.experience-role {
+				font-family: 'Space Mono', monospace;
+				color: white;
+				font-size: 1.02em;
+				letter-spacing: 0.5px;
+				margin: 0 0 4px;
+			}
+			.experience-company {
+				color: var(--text-muted);
+				font-size: 0.85em;
+				margin: 0;
+			}
+			.experience-company a { color: var(--accent); text-decoration: none; }
+			.experience-company a:hover { text-decoration: underline; }
+			.experience-dates {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.7em;
+				letter-spacing: 1px;
+				color: var(--text-muted);
+				white-space: nowrap;
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				padding: 5px 10px;
+			}
+			.experience-desc {
+				color: rgba(255,255,255,0.78);
+				line-height: 1.8;
+				font-size: 0.9em;
+				margin: 1em 0 1.2em;
+			}
+			.experience-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+			}
+			.experience-tag {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.62em;
+				letter-spacing: 1px;
+				padding: 4px 10px;
+				background: var(--bg-card2);
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				color: var(--text-muted);
+			}
+
+			/* ── PROJECTS ── */
+			#projects {
+				background: var(--bg-dark);
+				padding: 5em 0;
+				border-top: 1px solid var(--border);
+			}
+			.section-header-block {
+				text-align: center;
+				margin-bottom: 3em;
+			}
+			.section-label {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.65em;
+				letter-spacing: 4px;
+				color: var(--accent);
+				text-transform: uppercase;
+				margin: 0 0 10px;
+			}
+			.section-title {
+				font-family: 'Space Mono', monospace;
+				font-size: 2em;
+				color: white;
+				margin: 0;
+				letter-spacing: 2px;
+			}
+
+			.projects-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+				gap: 1.4em;
+				padding: 0 2em;
+				max-width: 1100px;
+				margin: 0 auto;
+			}
+
+			/* Featured card spans 2 cols on wide screens */
+			.project-card.featured {
+				grid-column: span 2;
+			}
+			@media (max-width: 720px) {
+				.project-card.featured { grid-column: span 1; }
+			}
+
+			.project-card {
+				position: relative;
+				border-radius: 10px;
+				overflow: hidden;
+				cursor: pointer;
+				height: 240px;
+				border: 1px solid var(--border);
+				transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+			}
+			.project-card.featured { height: 290px; }
+			.project-card:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+				border-color: rgba(79,172,254,0.3);
+			}
+			.project-image {
+				width: 100%; height: 100%;
+				object-fit: cover;
+				transition: transform 0.4s;
+			}
+			.project-card:hover .project-image { transform: scale(1.05); }
+
+			/* Fallback color backgrounds for cards without matching images */
+			.project-card.card-certiLens { background: linear-gradient(135deg, #0d1b2a, #1a3a5c); }
+			.project-card.card-credora { background: linear-gradient(135deg, #0d1f0d, #1a3d1a); }
+
+			.project-card-placeholder {
+				width: 100%; height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 14px;
+			}
+			.project-card-placeholder i {
+				font-size: 3em;
+				opacity: 0.5;
+			}
+			.card-certiLens .project-card-placeholder i { color: var(--accent); }
+			.card-credora .project-card-placeholder i { color: var(--green); }
+
+			.project-overlay {
+				position: absolute;
+				bottom: 0; left: 0; right: 0;
+				background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+				padding: 1.6em 1.4em 1.2em;
+				color: white;
+			}
+			.project-tag {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.6em;
+				letter-spacing: 2px;
+				padding: 3px 8px;
+				border-radius: 3px;
+				margin-bottom: 6px;
+				display: inline-block;
+			}
+			.tag-chrome { background: rgba(79,172,254,0.2); color: var(--accent); border: 1px solid rgba(79,172,254,0.3); }
+			.tag-web { background: rgba(67,217,142,0.2); color: var(--green); border: 1px solid rgba(67,217,142,0.3); }
+			.tag-lab { background: rgba(224,91,91,0.2); color: #f08080; border: 1px solid rgba(224,91,91,0.3); }
+			.tag-siem { background: rgba(255,200,80,0.2); color: #ffd060; border: 1px solid rgba(255,200,80,0.3); }
+			.tag-study { background: rgba(180,120,255,0.2); color: #c490ff; border: 1px solid rgba(180,120,255,0.3); }
+
+			.project-title {
+				color: white;
+				font-family: 'Space Mono', monospace;
+				font-size: 1em;
+				letter-spacing: 1px;
+				margin: 0 0 4px;
+			}
+			.project-short-desc {
+				color: rgba(255,255,255,0.65);
+				font-size: 0.82em;
+				margin: 0;
+			}
+
+			/* ── MODAL ── */
+			.modal {
+				display: none;
+				position: fixed;
+				inset: 0;
+				background: rgba(0,0,0,0.92);
+				z-index: 2000;
+				overflow-y: auto;
+				padding: 1.5em;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+			.modal.show { opacity: 1; }
+			.modal-content {
+				max-width: 720px;
+				margin: 40px auto;
+				background: var(--bg-card);
+				border-radius: 12px;
+				padding: 2em;
+				position: relative;
+				color: white;
+				border: 1px solid var(--border);
+				transform: translateY(20px);
+				transition: transform 0.3s ease;
+			}
+			.modal.show .modal-content { transform: translateY(0); }
+			.close-modal {
+				position: absolute;
+				top: 16px; right: 16px;
+				font-size: 1.2em;
+				color: rgba(255,255,255,0.5);
+				cursor: pointer;
+				background: none;
+				border: none;
+				width: 36px; height: 36px;
+				display: flex; align-items: center; justify-content: center;
+				border-radius: 6px;
+				transition: all 0.2s;
+			}
+			.close-modal:hover { color: white; background: rgba(255,255,255,0.1); }
+			.modal-title {
+				font-family: 'Space Mono', monospace;
+				color: var(--accent);
+				font-size: 1.4em;
+				letter-spacing: 1px;
+				margin-bottom: 6px;
+			}
+			.modal-subtitle {
+				color: var(--text-muted);
+				font-size: 0.82em;
+				margin-bottom: 1.4em;
+				letter-spacing: 1px;
+			}
+			.modal-image {
+				width: 100%;
+				max-height: 340px;
+				object-fit: contain;
+				border-radius: 8px;
+				margin-bottom: 1.4em;
+				border: 1px solid var(--border);
+				background: var(--bg-card2);
+			}
+			.modal-description {
+				color: rgba(255,255,255,0.78);
+				line-height: 1.8;
+				font-size: 0.94em;
+				margin-bottom: 1.4em;
+			}
+			.modal-tech-row {
+				display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.4em;
+			}
+			.modal-tech {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.65em;
+				letter-spacing: 1px;
+				padding: 4px 10px;
+				background: var(--bg-card2);
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				color: var(--text-muted);
+			}
+			.modal-links { display: flex; gap: 10px; flex-wrap: wrap; }
+			.modal-link {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.75em;
+				letter-spacing: 1px;
+				padding: 10px 20px;
+				background: var(--accent);
+				color: #0e1117;
+				text-decoration: none;
+				border-radius: 5px;
+				font-weight: 700;
+				transition: all 0.3s;
+				display: inline-flex;
+				align-items: center;
+				gap: 7px;
+			}
+			.modal-link:hover { background: white; transform: translateY(-2px); }
+			.modal-link.secondary {
+				background: transparent;
+				color: var(--accent);
+				border: 1px solid rgba(79,172,254,0.4);
+			}
+			.modal-link.secondary:hover { background: rgba(79,172,254,0.08); color: var(--accent); }
+
+			/* ── STAT PILLS in modal ── */
+			.modal-stats {
+				display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.4em;
+			}
+			.modal-stat {
+				background: var(--bg-card2);
+				border: 1px solid var(--border);
+				border-radius: 8px;
+				padding: 10px 16px;
+				text-align: center;
+				min-width: 80px;
+			}
+			.modal-stat-value {
+				font-family: 'Space Mono', monospace;
+				font-size: 1.3em;
+				color: var(--accent);
+				display: block;
+				margin-bottom: 2px;
+			}
+			.modal-stat-label {
+				font-size: 0.68em;
+				color: var(--text-muted);
+				letter-spacing: 1px;
+			}
+
+			/* ── CERTIFICATIONS ── */
+			#certs {
+				background: linear-gradient(160deg, #0a0f1a 0%, #0e1117 100%);
+				padding: 5em 0;
+				border-top: 1px solid var(--border);
+			}
+			.certifications-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 1.6em;
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 0 2em;
+			}
+			.certification-card {
+				background: var(--bg-card);
+				border-radius: 10px;
+				overflow: hidden;
+				border: 1px solid var(--border);
+				display: flex;
+				flex-direction: column;
+				transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+			}
+			.certification-card:hover {
+				transform: translateY(-5px);
+				border-color: rgba(79,172,254,0.3);
+				box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+			}
+			.certification-image-wrapper {
+				background: white;
+				padding: 1.2em;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				aspect-ratio: 1.414;
+			}
+			.certification-image {
+				width: 100%; height: 100%;
+				object-fit: contain;
+			}
+			.certification-actions {
+				padding: 1.2em;
+				text-align: center;
+			}
+			.certification-link {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.72em;
+				letter-spacing: 1.5px;
+				color: rgba(255,255,255,0.7);
+				text-decoration: none;
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 8px 16px;
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				transition: all 0.3s;
+			}
+			.certification-link:hover { color: var(--accent); border-color: rgba(79,172,254,0.4); }
+			.arrow-icon { transition: transform 0.3s; }
+			.certification-link:hover .arrow-icon { transform: translateX(4px); }
+
+			/* ── CONTACT ── */
+			#contact {
+				background: var(--bg-dark);
+				border-top: 1px solid var(--border);
+				padding: 5em 2em;
+				text-align: center;
+			}
+			.contact-container { max-width: 600px; margin: 0 auto; }
+			.email-display {
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				padding: 14px 28px;
+				border-radius: 50px;
+				margin-bottom: 2em;
+				transition: border-color 0.3s;
+			}
+			.email-display:hover { border-color: rgba(79,172,254,0.4); }
+			.email-display i { color: var(--accent); font-size: 1.1em; }
+			.email-link {
+				font-family: 'Space Mono', monospace;
+				font-size: 0.82em;
+				color: var(--text);
+				text-decoration: none;
+				letter-spacing: 0.5px;
+			}
+			.social-links { display: flex; justify-content: center; gap: 12px; }
+			.social-link {
+				display: flex; align-items: center; justify-content: center;
+				width: 42px; height: 42px;
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				color: rgba(255,255,255,0.65);
+				border-radius: 8px;
+				text-decoration: none;
+				transition: all 0.3s;
+			}
+			.social-link:hover {
+				background: var(--accent);
+				color: #0e1117;
+				border-color: var(--accent);
+				transform: translateY(-3px);
+				box-shadow: 0 8px 20px rgba(79,172,254,0.3);
+			}
+			.copyright {
+				margin-top: 2.5em;
+				color: var(--text-muted);
+				font-size: 0.78em;
+				font-family: 'Space Mono', monospace;
+				letter-spacing: 1px;
+			}
+
+			/* ── RESPONSIVE ── */
+			@media (max-width: 768px) {
+				.nav-bar { padding: 18px 20px; }
+				.nav-bar.scrolled { padding: 12px 20px; }
+				.nav-links { gap: 16px; }
+				.nav-links a { font-size: 0.65em; }
+				.landing-content h1 { font-size: 1.8em; }
+				.profile-header { grid-template-columns: 1fr; gap: 28px; }
+				.profile-pic { max-width: 220px; margin: 0 auto; display: block; }
+				.projects-grid { grid-template-columns: 1fr; }
+				.project-card.featured { grid-column: span 1; height: 240px; }
+				.section-title { font-size: 1.5em; }
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Navigation Bar -->
+		<div class="nav-bar" id="navBar">
+			<div class="name-title" onclick="scrollToTop()">JALEN JOSEPH</div>
+			<div class="nav-links">
+				<a href="#about">About</a>
+				<a href="#experience">Experience</a>
+				<a href="#projects">Projects</a>
+				<a href="#certs">Certs</a>
+				<a href="#contact">Contact</a>
+				<a href="images/Resume.pdf" target="_blank" class="resume-nav"><i class="fas fa-file-pdf" style="margin-right:5px;"></i>Resume</a>
+			</div>
+		</div>
+
+		<!-- Landing Page -->
+		<section id="landing" class="landing-page">
+			<img src="images/Rest3.png" alt="Jalen Joseph" class="profile-overlay" />
+			<div class="landing-content">
+				<h1>Jalen Joseph</h1>
+				<p class="landing-sub">Cybersecurity Enthusiast &nbsp;·&nbsp; High School Developer</p>
+				<p class="landing-handle"><a href="https://github.com/JalenTechHub" target="_blank">@JalenTechHub</a></p>
+				<div class="cert-badges">
+					<span class="cert-badge sec">CompTIA Security+</span>
+					<span class="cert-badge net">Network+</span>
+					<span class="cert-badge itf">ITF+</span>
+				</div>
+				<a href="#about" class="enter-btn">Enter Portfolio</a>
+			</div>
+			<div class="scroll-indicator">
+				<div class="scroll-line"></div>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section id="about">
+			<div class="inner">
+				<div class="profile-header">
+					<img src="images/Out.png" alt="Jalen Joseph" class="profile-pic" />
+					<div class="bio-content">
+						<h2>Jalen Joseph</h2>
+						<p class="bio-role">Cybersecurity &nbsp;·&nbsp; 11th Grade &nbsp;·&nbsp; Builder</p>
+						<p>I'm a high school student deeply interested in cybersecurity and the mechanics of technology. I've built browser security tools, credential-scanning web apps, and study platforms — all motivated by a desire to understand systems well enough to both break and defend them.</p>
+						<p>I hold CompTIA Security+, Network+, and ITF+ certifications, and have hands-on experience through CyberPatriot competitions. Outside of tech, I'm a competitive swimmer.</p>
+						<div class="bio-divider"></div>
+						<p style="font-size:0.8em;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;font-family:'Space Mono',monospace;margin-bottom:12px;">Explore</p>
+						<div class="category-links">
+							<a href="#experience" class="category-link">Experience</a>
+							<a href="#projects" class="category-link">Projects</a>
+							<a href="#certs" class="category-link">Certifications</a>
+							<a href="#contact" class="category-link">Contact</a>
+							<a href="images/Resume.pdf" class="category-link resume-link" target="_blank">
+								<i class="fas fa-file-pdf" style="margin-right:6px;"></i>Resume
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Experience Section -->
+		<section id="experience">
+			<div class="section-header-block">
+				<p class="section-label">Work</p>
+				<h2 class="section-title">Experience</h2>
+			</div>
+			<div class="experience-list">
+				<article class="experience-card">
+					<div class="experience-top">
+						<div class="experience-role-group">
+							<div class="experience-icon"><i class="fas fa-shield-alt"></i></div>
+							<div>
+								<h3 class="experience-role">Cybersecurity Information Assurance Intern</h3>
+								<p class="experience-company"><a href="https://www.linkedin.com/in/jalen-joseph/" target="_blank">Broward County Public Schools</a> · Internship</p>
+							</div>
+						</div>
+						<span class="experience-dates">May 2026 – Jul 2026</span>
+					</div>
+					<p class="experience-desc">Conducted vulnerability assessments, analyzed security alerts, investigated potential threats, and documented indicators of compromise (IOCs). Developed cybersecurity awareness materials and applied NIST CSF, ISO 27001, and CIS Controls to evaluate risks, improve security posture, and support security operations initiatives across the 6th largest school district in the country.</p>
+					<div class="experience-tags">
+						<span class="experience-tag">NIST CSF</span>
+						<span class="experience-tag">ISO 27001</span>
+						<span class="experience-tag">CIS Controls</span>
+						<span class="experience-tag">SOC</span>
+						<span class="experience-tag">Vulnerability Management</span>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<!-- Projects Section -->
+		<section id="projects">
+			<div class="section-header-block">
+				<p class="section-label">Work</p>
+				<h2 class="section-title">Projects</h2>
+			</div>
+			<div class="projects-grid">
+
+				<!-- CertiLens — FEATURED -->
+				<div class="project-card featured card-certiLens" onclick="openModal('certilens')">
+					<div class="project-card-placeholder">
+						<i class="fas fa-shield-alt"></i>
+					</div>
+					<div class="project-overlay">
+						<span class="project-tag tag-chrome">Chrome Extension · MV3</span>
+						<h3 class="project-title">CertiLens</h3>
+						<p class="project-short-desc">Real-time phishing detection powered by 6 parallel security engines.</p>
+					</div>
+				</div>
+
+				<!-- Credora -->
+				<div class="project-card card-credora" onclick="openModal('credora')">
+					<div class="project-card-placeholder">
+						<i class="fas fa-book-open"></i>
+					</div>
+					<div class="project-overlay">
+						<span class="project-tag tag-study">Study Guide · Web App</span>
+						<h3 class="project-title">Credora</h3>
+						<p class="project-short-desc">CompTIA A+, Net+, Security+ study guide web app.</p>
+					</div>
+				</div>
+
+				<!-- Project 1 -->
+				<div class="project-card" onclick="openModal('project1')">
+					<img src="images/Project1.png" alt="DoS Attack Demo" class="project-image">
+					<div class="project-overlay">
+						<span class="project-tag tag-lab">Lab Demo</span>
+						<h3 class="project-title">Denial of Service Attack</h3>
+						<p class="project-short-desc">Controlled DoS attack demonstration with network flooding analysis.</p>
+					</div>
+				</div>
+
+				<!-- Project 2 -->
+				<div class="project-card" onclick="openModal('project2')">
+					<img src="images/Project2.png" alt="Credential Harvesting" class="project-image">
+					<div class="project-overlay">
+						<span class="project-tag tag-lab">Kali Linux</span>
+						<h3 class="project-title">Credential Harvesting</h3>
+						<p class="project-short-desc">Simulated phishing attack using a fake login page in a test environment.</p>
+					</div>
+				</div>
+
+				<!-- Project 3 -->
+				<div class="project-card" onclick="openModal('project3')">
+					<img src="images/Project3.png" alt="SIEM Setup" class="project-image">
+					<div class="project-overlay">
+						<span class="project-tag tag-siem">Home Lab</span>
+						<h3 class="project-title">Home Lab SIEM Setup</h3>
+						<p class="project-short-desc">Built a SIEM for log monitoring and alert configuration from scratch.</p>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<!-- ── MODALS ── -->
+
+		<!-- CertiLens Modal -->
+		<div id="certilens-modal" class="modal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal('certilens')">&times;</button>
+				<h3 class="modal-title">CertiLens</h3>
+				<p class="modal-subtitle">Chrome Extension · Manifest V3 · Open Source (GPL-3)</p>
+				<div class="modal-stats">
+					<div class="modal-stat"><span class="modal-stat-value">6</span><span class="modal-stat-label">Engines</span></div>
+					<div class="modal-stat"><span class="modal-stat-value">~2s</span><span class="modal-stat-label">Scan Time</span></div>
+					<div class="modal-stat"><span class="modal-stat-value">0</span><span class="modal-stat-label">API Keys</span></div>
+					<div class="modal-stat"><span class="modal-stat-value">MV3</span><span class="modal-stat-label">Compliant</span></div>
+				</div>
+				<p class="modal-description">
+					CertiLens is a real-time phishing detection Chrome extension that runs six independent security engines in parallel — Certificate Transparency (crt.sh), domain age via RDAP, DNS email security (SPF/DMARC over DoH), HTTP security header audit, DOM heuristics, and homograph detection. Unlike blocklist-based tools, it actively analyzes sites it has never seen before, catching brand-new phishing domains before any database knows they exist. Each engine contributes an additive penalty to a 0–100 risk score, and every finding is surfaced with a clear rationale — no black boxes.
+				</p>
+				<div class="modal-tech-row">
+					<span class="modal-tech">Vanilla JavaScript</span>
+					<span class="modal-tech">Chrome MV3</span>
+					<span class="modal-tech">crt.sh API</span>
+					<span class="modal-tech">RDAP Protocol</span>
+					<span class="modal-tech">Cloudflare DoH</span>
+					<span class="modal-tech">DOM Heuristics</span>
+					<span class="modal-tech">Promise.all()</span>
+				</div>
+				<div class="modal-links">
+					<a href="https://chromewebstore.google.com/detail/gfpmhgmpjefpkjgmiheafciplajjccbb?utm_source=item-share-cb" class="modal-link" target="_blank"><i class="fab fa-chrome"></i>Add to Chrome</a>
+					<a href="https://github.com/JalenTechHub/CertiLens" class="modal-link secondary" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+					<a href="https://jalentechhub.github.io/CertiLens-Website/" class="modal-link secondary" target="_blank"><i class="fas fa-external-link-alt"></i>Project Page</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Credora Modal -->
+		<div id="credora-modal" class="modal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal('credora')">&times;</button>
+				<h3 class="modal-title">Credora</h3>
+				<p class="modal-subtitle">CompTIA Study Guide · Web App</p>
+				<p class="modal-description">
+					Credora is a web-based CompTIA study guide covering A+ (220-1101/1102), Network+ (N10-009), and Security+ (SY0-701). It organizes exam content into searchable, structured notes with domain breakdowns — designed to be exam-ready and easy to navigate. The platform covers everything from hardware fundamentals to cryptography, identity management, and incident response across all three certifications.
+				</p>
+				<div class="modal-tech-row">
+					<span class="modal-tech">HTML / CSS / JS</span>
+					<span class="modal-tech">CompTIA A+</span>
+					<span class="modal-tech">Network+</span>
+					<span class="modal-tech">Security+</span>
+					<span class="modal-tech">SY0-701</span>
+				</div>
+				<div class="modal-links">
+					<a href="https://jalentechhub.github.io/Credora/" class="modal-link" target="_blank"><i class="fas fa-external-link-alt"></i>Open Credora</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Project 1 Modal -->
+		<div id="project1-modal" class="modal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal('project1')">&times;</button>
+				<h3 class="modal-title">Denial of Service Attack</h3>
+				<p class="modal-subtitle">Lab Demo · Network Security</p>
+				<img src="images/Project1.png" alt="DoS Attack Demo" class="modal-image">
+				<p class="modal-description">
+					A demonstration of how a basic Denial of Service (DoS) attack works in a controlled lab environment. The project covers tools used to overwhelm a target system, the concept of network flooding, and system overload mechanics. Fully documented on YouTube with step-by-step explanations — for educational purposes only.
+				</p>
+				<div class="modal-tech-row">
+					<span class="modal-tech">Kali Linux</span>
+					<span class="modal-tech">Network Analysis</span>
+					<span class="modal-tech">Wireshark</span>
+				</div>
+				<div class="modal-links">
+					<a href="https://youtu.be/AF3cBS8dw4s?si=jOQJV43kSeQEYm91" class="modal-link" target="_blank"><i class="fab fa-youtube"></i>Watch on YouTube</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Project 2 Modal -->
+		<div id="project2-modal" class="modal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal('project2')">&times;</button>
+				<h3 class="modal-title">Credential Harvesting</h3>
+				<p class="modal-subtitle">Kali Linux · Social Engineering</p>
+				<img src="images/Project2.png" alt="Credential Harvesting" class="modal-image">
+				<p class="modal-description">
+					A walkthrough of credential harvesting via social engineering. Using Kali Linux and a phishing toolkit, a fake login page is set up to collect credentials in a test environment. The full process — setup, execution, and defensive takeaways — is documented on YouTube.
+				</p>
+				<div class="modal-tech-row">
+					<span class="modal-tech">Kali Linux</span>
+					<span class="modal-tech">SET Toolkit</span>
+					<span class="modal-tech">Phishing Simulation</span>
+				</div>
+				<div class="modal-links">
+					<a href="https://youtu.be/fR4fbhgnSx8?si=UEl_w6NVV8iXu1rg" class="modal-link" target="_blank"><i class="fab fa-youtube"></i>Watch on YouTube</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Project 3 Modal -->
+		<div id="project3-modal" class="modal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal('project3')">&times;</button>
+				<h3 class="modal-title">Home Lab SIEM Setup</h3>
+				<p class="modal-subtitle">Home Lab · Security Operations</p>
+				<img src="images/Project3.png" alt="SIEM Setup" class="modal-image">
+				<p class="modal-description">
+					A basic Security Information and Event Management (SIEM) system built in a home lab to monitor logs and detect unusual activity. The project involved setting up virtual machines, collecting data from multiple sources, and configuring alert systems — all documented on YouTube.
+				</p>
+				<div class="modal-tech-row">
+					<span class="modal-tech">VirtualBox</span>
+					<span class="modal-tech">Elastic SIEM</span>
+					<span class="modal-tech">Log Analysis</span>
+				</div>
+				<div class="modal-links">
+					<a href="https://youtu.be/siU302-HZb4?si=UpXVPlUwCFXJJ6bJ" class="modal-link" target="_blank"><i class="fab fa-youtube"></i>Watch on YouTube</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Certifications Section -->
+		<section id="certs">
+			<div class="section-header-block">
+				<p class="section-label">Credentials</p>
+				<h2 class="section-title">Certifications</h2>
+			</div>
+			<div class="certifications-grid">
+				<article class="certification-card">
+					<div class="certification-image-wrapper">
+						<img src="images/Cert1.png" alt="Security+ Certification" class="certification-image" loading="lazy">
+					</div>
+					<div class="certification-actions">
+						<a href="https://www.comptia.org/en-us/certifications/security" target="_blank" class="certification-link">
+							Learn More <span class="arrow-icon">→</span>
+						</a>
+					</div>
+				</article>
+				<article class="certification-card">
+					<div class="certification-image-wrapper">
+						<img src="images/Cert2.png" alt="Network+ Certification" class="certification-image" loading="lazy">
+					</div>
+					<div class="certification-actions">
+						<a href="https://www.comptia.org/certifications/network" target="_blank" class="certification-link">
+							Learn More <span class="arrow-icon">→</span>
+						</a>
+					</div>
+				</article>
+				<article class="certification-card">
+					<div class="certification-image-wrapper">
+						<img src="images/Cert3.png" alt="ITF+" class="certification-image" loading="lazy">
+					</div>
+					<div class="certification-actions">
+						<a href="https://www.comptia.org/certifications/it-fundamentals" target="_blank" class="certification-link">
+							Learn More <span class="arrow-icon">→</span>
+						</a>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact">
+			<div class="contact-container">
+				<p class="section-label" style="margin-bottom:10px;">Get in Touch</p>
+				<h2 class="section-title" style="margin-bottom:1.8em;">Contact</h2>
+				<div class="email-display">
+					<i class="fas fa-envelope"></i>
+					<a class="email-link" href="mailto:jalenjosephsemail@gmail.com">jalenjosephsemail@gmail.com</a>
+				</div>
+				<div class="social-links">
+					<a href="https://www.linkedin.com/in/jalen-joseph/" target="_blank" class="social-link" title="LinkedIn">
+						<i class="fab fa-linkedin-in"></i>
+					</a>
+					<a href="https://github.com/JalenTechHub" target="_blank" class="social-link" title="GitHub">
+						<i class="fab fa-github"></i>
+					</a>
+					<a href="https://www.youtube.com/@JalenTechHub" target="_blank" class="social-link" title="YouTube">
+						<i class="fab fa-youtube"></i>
+					</a>
+				</div>
+				<p class="copyright">Copyright © Jalen Joseph 2026</p>
+			</div>
+		</section>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script>
+			// Navbar scroll effect
+			window.addEventListener('scroll', function() {
+				const navBar = document.getElementById('navBar');
+				navBar.classList.toggle('scrolled', window.scrollY > 50);
+			});
+
+			function scrollToTop() {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			}
+
+			// Smooth scroll for anchor links
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function(e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) target.scrollIntoView({ behavior: 'smooth' });
+				});
+			});
+
+			// Modal functions
+			function openModal(id) {
+				const modal = document.getElementById(id + '-modal');
+				modal.style.display = 'block';
+				document.body.style.overflow = 'hidden';
+				setTimeout(() => modal.classList.add('show'), 10);
+			}
+			function closeModal(id) {
+				const modal = document.getElementById(id + '-modal');
+				modal.classList.remove('show');
+				setTimeout(() => {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}, 300);
+			}
+			window.addEventListener('click', function(e) {
+				if (e.target.classList.contains('modal') && e.target.classList.contains('show')) {
+					e.target.classList.remove('show');
+					setTimeout(() => {
+						e.target.style.display = 'none';
+						document.body.style.overflow = 'auto';
+					}, 300);
+				}
+			});
+
+			// Escape key closes modal
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					document.querySelectorAll('.modal.show').forEach(m => {
+						m.classList.remove('show');
+						setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 300);
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
